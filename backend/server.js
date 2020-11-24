@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRoutes);
 // FOR VISITING A NONE EXISTING PAGE
 app.use(notFound);
-// FOR INDICATIN EROORS
+// FOR INDICATING EROORS
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;

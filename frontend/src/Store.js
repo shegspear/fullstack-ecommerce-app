@@ -18,4 +18,5 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(...middleware))
 );
 
+// current bug may come from here typo 
 export default store;

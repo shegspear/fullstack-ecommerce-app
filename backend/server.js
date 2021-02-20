@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import cors from 'cors';
 
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
 });
 
 // SOME MIDDLEWARE
+app.use(cors());
 // FOR ROUTE
 app.use('/api/products', productRoutes);
 // FOR VISITING A NONE EXISTING PAGE

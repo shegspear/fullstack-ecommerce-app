@@ -6,6 +6,7 @@ import cors from 'cors';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config()
 
@@ -13,16 +14,22 @@ connectDB();
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/', (req, res) => {
    res.send('API is running');
 });
 
 // SOME MIDDLEWARE
 app.use(cors());
+
 // FOR ROUTE
 app.use('/api/products', productRoutes);
+app.use('/api/user', userRoutes);
+
 // FOR VISITING A NONE EXISTING PAGE
 app.use(notFound);
+
 // FOR INDICATING EROORS
 app.use(errorHandler);
 

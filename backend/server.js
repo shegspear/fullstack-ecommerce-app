@@ -25,7 +25,7 @@ app.use(cors());
 
 // FOR ROUTE
 app.use('/api/products', productRoutes);
-app.use('/api/user', userRoutes);
+app.use('/api/users', userRoutes);
 
 // FOR VISITING A NONE EXISTING PAGE
 app.use(notFound);

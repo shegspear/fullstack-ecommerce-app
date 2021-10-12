@@ -7,6 +7,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 dotenv.config()
 
@@ -26,6 +27,7 @@ app.use(cors());
 // FOR ROUTE
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 // FOR VISITING A NONE EXISTING PAGE
 app.use(notFound);

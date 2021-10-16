@@ -45,7 +45,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
 };
 
 export const getOrderDetails = (id) => async (dispatch, getState) => {
-    
+   console.log(id) 
   try {
 
     dispatch({
@@ -54,8 +54,8 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
 
     const { userLogin: { userInfo } } = getState();
 
-    const {data} = await axios.post(
-      `/api/orders${id}`,
+    const {data} = await axios.get(
+      `/api/orders/${id}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,

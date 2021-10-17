@@ -29,7 +29,7 @@ const OrderScreen = ({match}) => {
     //   dispatch(getOrderDetails(orderId));
     // }, [dispatch, orderId]);
 
-    // class note message to add
+    // class note message code adjustment
     useEffect(() => {
         if(!order || order._id !== orderId) {
             dispatch(getOrderDetails(orderId))
@@ -39,7 +39,7 @@ const OrderScreen = ({match}) => {
     return  loading ? <Loader/> :
             error ? <Message variant='danger'> {error} </Message> :
             <>
-                <h1>Order {order._id} </h1>
+                <h1>Order id : {order._id} </h1>
                 <Row>
 
                     <Col md={8}>

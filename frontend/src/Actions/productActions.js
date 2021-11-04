@@ -6,7 +6,10 @@ import {
     PRODUCT_LIST_FAIL, 
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
-    PRODUCT_DETAILS_FAIL
+    PRODUCT_DETAILS_FAIL,
+    PRODUCT_DELETE_REQUEST,
+    PRODUCT_DELETE_SUCCESS,
+    PRODUCT_DELETE_FAIL
 } from '../Constants/ProductsConstants';
 
 export const listProducts = () => async (dispatch) => {
@@ -47,3 +50,36 @@ export const listProductDetails = (id) => async (dispatch) => {
         });
     }
 };
+
+export const deleteProduct = (id) => async (dispatch, getState) => {
+ 
+    try {
+   
+      dispatch({
+          type: PRODUCT_DELETE_REQUEST,
+      });
+   
+      const { userLogin: { userInfo } } = getState();
+   
+       await axios.delete(
+       `/api/products/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          }
+        }
+      );
+   
+      dispatch({
+          type: PRODUCT_DELETE_SUCCESS
+      });
+   
+    } catch (error) {
+      dispatch({
+          type: PRODUCT_DELETE_FAIL,
+          payload: error.response && error.response.data.message ?
+          error.response.data.message : error.message,
+      });
+    }
+   
+   };

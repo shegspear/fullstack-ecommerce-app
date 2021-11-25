@@ -24,10 +24,6 @@ if(process.env.NODE_ENV === 'development') {
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-   res.send('API is running');
-});
-
 // SOME MIDDLEWARE
 app.use(cors());
 
@@ -42,6 +38,17 @@ app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_I
 // make the upload folder static and acessible in the frontend
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
+// deploy staic build file frontend asset if in production
+if(process.env.NODE_ENV === 'production') {
+   app.use(express.static(path.join(__dirname, '/frontend/build')))
+
+   app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')))
+} else {
+   app.get('/', (req, res) => {
+      res.send('API is running');
+   });
+}
 
 // FOR VISITING A NONE EXISTING PAGE
 app.use(notFound);
